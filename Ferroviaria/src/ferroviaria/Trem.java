@@ -12,8 +12,8 @@ package ferroviaria;
 public class Trem {
     private int numeroTrem;
     private Data dataViagem;
-    private Boolean[] poltronas;
-    private int numeroVagas;
+    protected Boolean[] poltronas;
+    protected int numeroVagas;
 
     public Trem(int numeroTrem, Data dataViagem) {
         this.numeroTrem = numeroTrem;
@@ -61,12 +61,5 @@ public class Trem {
 
     public Data getDataViagem() {
         return dataViagem;
-    }
-
-    
-    
-    
-    
-    
-    
+    }   
 }

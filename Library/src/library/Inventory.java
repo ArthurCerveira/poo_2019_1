@@ -9,14 +9,8 @@ package library;
  *
  * @author arthur
  */
-public class Library {
-    private int numeroDeElementos;
-    private Item[] items;
+public class Inventory {
     
-    public Library(int tamanho) {
-        items = new Item[tamanho];
-        numeroDeElementos = 0;
-    }
 
     /**
      * @param args the command line arguments

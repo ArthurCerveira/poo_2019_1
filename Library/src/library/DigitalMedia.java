@@ -17,4 +17,14 @@ public class DigitalMedia extends Item{
         super(dmTitle, dmGotIt, dmComment);        
         playTime = dmPlayTime;
     }
+
+    public Time getPlayTime() {
+        return playTime;
+    }
+
+    public void setPlayTime(Time playTime) {
+        this.playTime = playTime;
+    }
+    
+    
 }

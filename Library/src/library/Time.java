@@ -35,4 +35,21 @@ public class Time {
     {
         return hours;
     }
+
+    public void setSeconds(int seconds) {
+        if(seconds >= 0 && seconds < 60)
+            this.seconds = seconds;
+    }
+
+    public void setMinutes(int minutes) {
+        if(minutes >= 0 && minutes < 24)
+            this.minutes = minutes;
+    }
+
+    public void setHours(int hours) {
+        if(hours >= 0 && hours <24)
+            this.hours = hours;
+    }
+      
+     
 }

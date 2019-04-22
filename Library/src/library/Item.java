@@ -20,5 +20,29 @@ public class Item {
         gotIt = itemGotIt;
         comment = itemComment;
     }
-    
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public boolean isGotIt() {
+        return gotIt;
+    }
+
+    public void setGotIt(boolean gotIt) {
+        this.gotIt = gotIt;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }    
+      
 }

@@ -24,13 +24,11 @@ public class LibraryItems {
         if(numberOfElements >= items.length){
             Item[] novaArea = new Item[items.length * 2];
             
-            if (novaArea != null) 
-            {                
+            if (novaArea != null){                
                 System.arraycopy(items, 0, novaArea, 0, numberOfElements);
                 
                 items = novaArea;                
-            }   
-            else
+            } else
                 System.err.println("Não foi possível inserir o item. Não há memória disponível");
         }
         

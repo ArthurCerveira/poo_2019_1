@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package the_game;
-
-import java.util.Random;
 /**
  *
  * @author aluno
@@ -15,30 +13,37 @@ public class Hero extends Character{
         super(name, healthPoints);
     }
     
-    void increment(){
-        if(healthPoints < 10)
-            healthPoints++;
-    }
-    
-    void decrement() {
-        healthPoints--;
-        if(healthPoints >= 0)
-            System.out.println("Game Over");
-    }
-    
     void aliment() {
         increment();
         increment();
-    }
-    
-    int luck() {
-        Random dados = new Random();
-        return dados.nextInt(6) + 1;
     }
     
     void printInfo() {
         String str;
         str = ("#####################\n# Nome: " + name + "\n# Energia: " + healthPoints +"\n#####################");
         System.out.println(str);
+    }
+    
+    void fight(Vilain enemy) {
+        // Throw the dice
+        if(enemy.luck() > this.luck()) {
+            this.decrement();
+            enemy.increment();
+        }
+        else if (enemy.luck() < this.luck()) {
+            enemy.decrement();
+            this.increment();
+        }
+        else {
+            this.decrement();
+            enemy.decrement();
+        }
+        
+        // Tests if the enemy or the hero fainted
+        if(this.healthPoints == 0)
+            System.out.println(enemy.name + " won.");
+        if(enemy.healthPoints == 0)
+            System.out.println(this.name + " won.");
+            
     }
 }

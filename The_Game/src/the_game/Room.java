@@ -15,10 +15,12 @@ import java.util.Set;
 public class Room {
     private String description;
     private HashMap<String, Room> exits;
+    private HashMap<String, Character> characters;
 
     public Room(String description) {
         this.description = description;
         exits = new HashMap<String, Room>();
+        characters = new HashMap<>();
     }
     
     public void setExit(String direction, Room neighbor){

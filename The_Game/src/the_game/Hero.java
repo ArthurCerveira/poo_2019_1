@@ -18,12 +18,6 @@ public class Hero extends Character{
         increment();
     }
     
-    void printInfo() {
-        String str;
-        str = ("#####################\n# Nome: " + name + "\n# Energia: " + healthPoints +"\n#####################");
-        System.out.println(str);
-    }
-    
     void fight(Vilain enemy) {
         // Throw the dice
         if(enemy.luck() > this.luck()) {
@@ -38,12 +32,5 @@ public class Hero extends Character{
             this.decrement();
             enemy.decrement();
         }
-        
-        // Tests if the enemy or the hero fainted
-        if(this.healthPoints == 0)
-            System.out.println(enemy.name + " won.");
-        if(enemy.healthPoints == 0)
-            System.out.println(this.name + " won.");
-            
     }
 }

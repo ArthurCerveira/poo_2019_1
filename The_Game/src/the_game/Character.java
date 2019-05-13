@@ -12,8 +12,8 @@ import java.util.Random;
  * @author aluno
  */
 public class Character {
-    String name;
-    int healthPoints;
+    private String name;
+    private int healthPoints;
 
     public Character(String name, int healthPoints) {
         this.name = name;
@@ -28,7 +28,7 @@ public class Character {
         return healthPoints;
     }
     
-      int luck() {
+    int luck() {
         System.out.println("Throwing the dice...");
         Random dados = new Random();
         System.out.println(name + " got a " + dados);
@@ -48,7 +48,13 @@ public class Character {
             System.out.println(name + " has fainted.");
         else
             System.out.println(name + " is already unable to fight.");
-    }  
+    }
+    
+    void printInfo() {
+        String str;
+        str = ("#####################\n# Nome: " + name + "\n# Energia: " + healthPoints +"\n#####################");
+        System.out.println(str);
+    }
 }
 
 

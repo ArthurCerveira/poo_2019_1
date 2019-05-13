@@ -20,14 +20,15 @@ public class BattleSimulator {
     }
     
     public void simulate() {
-        hero.fight(vilain);
-        hero.printInfo();
-        vilain.printInfo();
+        while(hero.getHealthPoints() != 0 && vilain.getHealthPoints() != 0) {
+            hero.fight(vilain);
+            hero.printInfo();
+            vilain.printInfo();
+        }
         
         if(hero.getHealthPoints() == 0) 
             System.out.println(vilain.getName() + " won.");
         if(vilain.getHealthPoints() == 0)
-            System.out.println(hero.getName() + " won.");
-        
+            System.out.println(hero.getName() + " won.");   
     }
 }

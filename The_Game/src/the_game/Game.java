@@ -5,6 +5,10 @@
  */
 package the_game;
 
+import character.Hero;
+import character.Vilain;
+import character.BattleSimulator;
+
 /**
  *
  * @author aluno
@@ -13,6 +17,7 @@ public class Game {
     private Parser parser;
     private Room currentRoom;
     private Hero hero;
+    private BattleSimulator battleSimulator;
     
     public Game(String name) 
     {
@@ -23,6 +28,7 @@ public class Game {
     
     public void createRooms() {
         Room outside, theatre, pub, lab, office;
+        Vilain scientist, bartender, actor, boss;
         
         //cria as salas
         outside = new Room("outside the main entrance of the university");
@@ -44,6 +50,18 @@ public class Game {
         lab.setExit("east", office);
 
         office.setExit("west", lab);
+        
+        //cria inimigos
+        scientist = new Vilain("scientist", 5);
+        bartender = new Vilain("bartender", 5);
+        actor  = new Vilain("actor", 5);
+        boss  = new Vilain("boss", 5);
+        
+        //coloca os inimigos nas salas
+        theatre.setCharacters(actor.getName(), actor);
+        pub.setCharacters(bartender.getName(), bartender);
+        lab.setCharacters(scientist.getName(), scientist);
+        office.setCharacters(boss.getName(), boss);
         
         currentRoom = outside; 
     }
@@ -88,6 +106,11 @@ public class Game {
         else if (commandWord == CommandWord.QUIT) {
             wantToQuit = quit(command);
         }
+        
+        else if (commandWord == CommandWord.ATTACK) {
+            attackEnemy(command);
+        }
+            
         // else command not recognised.
         return wantToQuit;
     }
@@ -119,7 +142,22 @@ public class Game {
         else {
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
+            currentRoom.printEnemies();
         }
+    }
+    
+    private void attackEnemy(Command command) {
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know who to attack...
+            System.out.println("Attack who?");
+            return;
+        }
+        
+        String enemy = command.getSecondWord();
+        
+        if (currentRoom.getCharacter(enemy) != null)
+            battleSimulator.simulate(hero, currentRoom.getCharacter(enemy));
+        else System.out.println("There is no enemy called " + enemy + "!");        
     }
     
     private boolean quit(Command command) 

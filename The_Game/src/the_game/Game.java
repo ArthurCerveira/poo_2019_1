@@ -24,6 +24,7 @@ public class Game {
         createRooms();
         parser = new Parser();
         hero = new Hero(name, 10);
+        battleSimulator = new BattleSimulator();
     }
     
     public void createRooms() {
@@ -69,7 +70,7 @@ public class Game {
     public void play() {            
         printWelcome();
         
-         boolean finished = false;
+        boolean finished = false;
         while (! finished) {
             Command command = parser.getCommand();
             finished = processCommand(command);
@@ -155,8 +156,10 @@ public class Game {
         
         String enemy = command.getSecondWord();
         
-        if (currentRoom.getCharacter(enemy) != null)
-            battleSimulator.simulate(hero, currentRoom.getCharacter(enemy));
+        Vilain vilain = currentRoom.getCharacter(enemy);
+        
+        if (vilain != null )            
+            battleSimulator.simulate(hero, vilain);
         else System.out.println("There is no enemy called " + enemy + "!");        
     }
     

@@ -31,8 +31,9 @@ public class Character {
     int luck() {
         System.out.println("Throwing the dice...");
         Random dados = new Random();
-        System.out.println(name + " got a " + dados);
-        return dados.nextInt(6) + 1;
+        int resultado = dados.nextInt(6) + 1;
+        System.out.println(name + " got a " + resultado);
+        return resultado;
     }
     
         

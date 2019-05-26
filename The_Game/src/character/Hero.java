@@ -23,17 +23,21 @@ public class Hero extends Character{
     
     void fight(Vilain enemy) {
         // Throw the dice
-        if(enemy.luck() > this.luck()) {
+        int enemyLuck = enemy.luck();
+        int heroLuck = this.luck();
+        if(enemyLuck > heroLuck) {
             this.decrement();
             enemy.increment();
         }
-        else if (enemy.luck() < this.luck()) {
-            enemy.decrement();
-            this.increment();
-        }
-        else {
-            this.decrement();
-            enemy.decrement();
+        else { 
+            if (enemyLuck < heroLuck) {
+                enemy.decrement();
+                this.increment();
+            }
+            else {
+                this.decrement();
+                enemy.decrement();
+            }
         }
     }
 }

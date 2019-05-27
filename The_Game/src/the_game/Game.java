@@ -23,7 +23,7 @@ public class Game {
     {
         createRooms();
         parser = new Parser();
-        hero = new Hero(name, 10);
+        hero = new Hero(name, 10, 10);
         battleSimulator = new BattleSimulator();
     }
     

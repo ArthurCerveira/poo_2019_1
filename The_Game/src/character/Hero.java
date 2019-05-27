@@ -6,14 +6,22 @@
 package character;
 
 import character.Character;
+import java.util.HashMap;
 
 /**
  *
  * @author aluno
  */
 public class Hero extends Character{
-    public Hero(String name, int healthPoints) {
+    private HashMap<String, Item> Inventory;
+    private int weightLimit;
+    private int currentWeight;
+    
+    public Hero(String name, int healthPoints, int weightLimit) {
         super(name, healthPoints);
+        Inventory = new HashMap<>();
+        this.weightLimit = weightLimit;
+        currentWeight = 0;
     }
     
     void aliment() {
@@ -39,5 +47,26 @@ public class Hero extends Character{
                 enemy.decrement();
             }
         }
+    }
+    
+    //Inventory functions
+
+    public boolean insertItem(String name, Item item) {
+        if((item.getWeight() + currentWeight) <= weightLimit) {
+            Inventory.put(name, item);
+            currentWeight += item.getWeight();
+            return true;
+        }
+        return false;
+    }
+    
+    public Item removeItem(String name) {
+        Item item = Inventory.get(name);
+        Inventory.remove(name);
+        return item;
+    }
+
+    public int getCurrentWeight() {
+        return currentWeight;
     }
 }

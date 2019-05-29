@@ -60,6 +60,10 @@ public class Hero extends Character{
         return false;
     }
     
+    public Item getItem(String name) {
+        return Inventory.get(name);
+    }
+    
     public Item removeItem(String name) {
         Item item = Inventory.get(name);
         Inventory.remove(name);

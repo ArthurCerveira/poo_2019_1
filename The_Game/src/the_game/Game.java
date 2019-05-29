@@ -8,6 +8,7 @@ package the_game;
 import character.Hero;
 import character.Vilain;
 import character.BattleSimulator;
+import character.Item;
 
 /**
  *
@@ -97,19 +98,25 @@ public class Game {
             return false;
         }
 
-        if (commandWord == CommandWord.HELP) {
-            printHelp();
-        }
-        else if (commandWord == CommandWord.GO) {
-            goRoom(command);
-        }
-        
-        else if (commandWord == CommandWord.QUIT) {
-            wantToQuit = quit(command);
-        }
-        
-        else if (commandWord == CommandWord.ATTACK) {
-            attackEnemy(command);
+        if (commandWord != null) switch (commandWord) {
+            case HELP:
+                printHelp();
+                break;
+            case GO:
+                goRoom(command);
+                break;
+            case QUIT:
+                wantToQuit = quit(command);
+                break;
+            case ATTACK:
+                attackEnemy(command);
+                break;
+            case PICK:
+                pickItem(command);
+            case DROP:
+                dropItem(command);
+            default:
+                break;
         }
             
         // else command not recognised.
@@ -161,6 +168,42 @@ public class Game {
         if (vilain != null )            
             battleSimulator.simulate(hero, vilain);
         else System.out.println("There is no enemy called " + enemy + "!");        
+    }
+    
+    private void pickItem(Command command) {
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know who to attack...
+            System.out.println("Pick what?");
+            return;
+        }
+        
+        String name = command.getSecondWord();
+        
+        Item item = currentRoom.getItem(name);
+        
+        if (item != null ){
+            hero.insertItem(name, item);
+            currentRoom.removeItem(name);
+        } else System.out.println("There is no item called " + name + "!");
+            
+    }
+    
+    private void dropItem(Command command){
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know who to attack...
+            System.out.println("Drop what?");
+            return;
+        }
+        
+        String name = command.getSecondWord();
+        
+        Item item = hero.getItem(name);
+        
+        if (item != null ){
+            hero.removeItem(name);
+            currentRoom.setItems(name, item);
+        } else System.out.println("You don't have an item called " + name + "!");
+            
     }
     
     private boolean quit(Command command) 

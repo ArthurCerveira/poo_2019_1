@@ -5,6 +5,7 @@
  */
 package character;
 
+import item.Item;
 import character.Character;
 import java.util.HashMap;
 

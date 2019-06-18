@@ -8,7 +8,7 @@ package the_game;
 import character.Vilain;
 import java.util.HashMap;
 import java.util.Set;
-import character.Item;
+import item.Item;
 
 /**
  *

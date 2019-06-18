@@ -8,7 +8,7 @@ package the_game;
 import character.Hero;
 import character.Vilain;
 import character.BattleSimulator;
-import character.Item;
+import item.Item;
 
 /**
  *

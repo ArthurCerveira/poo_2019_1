@@ -14,6 +14,7 @@ import java.util.Random;
 public class Character {
     private String name;
     private int healthPoints;
+    protected int coins;
 
     public Character(String name, int healthPoints) {
         this.name = name;
@@ -55,6 +56,14 @@ public class Character {
         String str;
         str = ("#####################\n# Nome: " + name + "\n# Energia: " + healthPoints +"\n#####################");
         System.out.println(str);
+    }
+    
+    int getCoins(){
+        return coins;
+    }
+    
+    void setCoins(int coins){
+        this.coins = coins;
     }
 }
 

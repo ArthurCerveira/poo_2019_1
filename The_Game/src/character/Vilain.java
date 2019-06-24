@@ -7,6 +7,8 @@ package character;
 
 import character.Character;
 
+import java.util.Random;
+
 /**
  *
  * @author aluno
@@ -14,6 +16,8 @@ import character.Character;
 public class Vilain extends Character{
     public Vilain(String name, int healthPoints) {
         super(name, healthPoints);
+        Random randomCoins = new Random();
+        this.coins = randomCoins.nextInt(200);
     }
     
 }

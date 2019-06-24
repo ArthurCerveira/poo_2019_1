@@ -22,7 +22,9 @@ public class BattleSimulator {
     }*/
     
     public void simulate(Hero hero, Vilain vilain){// throws InterruptedException {
-        System.out.println("A battle started!");
+        System.out.println("A battle started!\n" + 
+                           "You are fighting " + vilain.getName() + 
+                           " and he's carrying " + vilain.getCoins() + " coins");
         
         try {
             Thread.sleep(2000);
@@ -54,7 +56,11 @@ public class BattleSimulator {
         
         if(hero.getHealthPoints() == 0) 
             System.out.println(vilain.getName() + " won.");
-        if(vilain.getHealthPoints() == 0)
-            System.out.println(hero.getName() + " won.");   
+        if(vilain.getHealthPoints() == 0) {
+            System.out.println(hero.getName() + " won.\n" + vilain.getName() + 
+                              " dropped " + vilain.getCoins() + " coins.");
+            hero.setCoins(hero.getCoins() + vilain.getCoins());
+        }
+            
     }
 }

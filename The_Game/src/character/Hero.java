@@ -23,6 +23,7 @@ public class Hero extends Character{
         Inventory = new HashMap<>();
         this.weightLimit = weightLimit;
         currentWeight = 0;
+        coins = 0;
     }
     
     void aliment() {

@@ -9,6 +9,7 @@ import character.Hero;
 import character.Vilain;
 import character.BattleSimulator;
 import item.Item;
+import the_game.CommandWord;
 
 /**
  *
@@ -109,7 +110,7 @@ public class Game {
                 wantToQuit = quit(command);
                 break;
             case ATTACK:
-                attackEnemy(command);
+                wantToQuit = attackEnemy(command);
                 break;
             case PICK:
                 pickItem(command);
@@ -154,20 +155,32 @@ public class Game {
         }
     }
     
-    private void attackEnemy(Command command) {
+    //Se o heroi perder, retorna false e acaba o jogo
+    private boolean attackEnemy(Command command) {
         if(!command.hasSecondWord()) {
             // if there is no second word, we don't know who to attack...
             System.out.println("Attack who?");
-            return;
+            return false;
         }
         
         String enemy = command.getSecondWord();
         
         Vilain vilain = currentRoom.getCharacter(enemy);
         
-        if (vilain != null )            
+        if (vilain != null ) {
             battleSimulator.simulate(hero, vilain);
-        else System.out.println("There is no enemy called " + enemy + "!");        
+            if(vilain.getHealthPoints() == 0){
+                //System.out.println(enemy + " is no longer in the room");
+                currentRoom.removeCharacter(enemy);
+            }
+            
+            if(hero.getHealthPoints() == 0){
+                System.out.println("Game Over.");
+                return true;
+            }
+        } else System.out.println("There is no enemy called " + enemy + "!"); 
+        
+        return false;
     }
     
     private void pickItem(Command command) {

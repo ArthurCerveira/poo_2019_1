@@ -63,6 +63,10 @@ public class Room {
         return characters.get(name);
     }
     
+    public void removeCharacter(String name){
+        characters.remove(name);
+    }
+    
     public Item getItem(String name) {
         return items.get(name);
     }

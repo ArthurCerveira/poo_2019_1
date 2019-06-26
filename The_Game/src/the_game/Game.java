@@ -9,6 +9,7 @@ import character.Hero;
 import character.Vilain;
 import character.BattleSimulator;
 import item.Item;
+import java.util.Scanner;
 import the_game.CommandWord;
 
 /**
@@ -20,6 +21,7 @@ public class Game {
     private Room currentRoom;
     private Hero hero;
     private BattleSimulator battleSimulator;
+    private boolean gameOver;
     
     public Game(String name) 
     {
@@ -27,6 +29,7 @@ public class Game {
         parser = new Parser();
         hero = new Hero(name, 10, 10);
         battleSimulator = new BattleSimulator();
+        gameOver = false;
     }
     
     public void createRooms() {
@@ -69,15 +72,42 @@ public class Game {
         currentRoom = outside; 
     }
     
+    public void menu() {
+        Scanner menuReader = new Scanner(System.in);
+        int option;
+        
+        System.out.println("\nMENU");
+        System.out.println("1 - New Game");
+        System.out.println("2 - Load Game");
+        System.out.println("3 - Quit\n");
+        
+        option = menuReader.nextInt();
+        
+        switch (option){
+            case 1:
+                play();
+                break;
+            case 3:
+                System.out.println("Thank you for playing.  Good bye.");
+                break;
+        }
+        
+        if(gameOver){ //se gameOver for verdadeiro, abre o menu novamente
+            gameOver = false;
+            menu();
+        }
+    }
+    
     public void play() {            
         printWelcome();
         
         boolean finished = false;
-        while (! finished) {
+        while (!(finished) && !(gameOver)) {
             Command command = parser.getCommand();
-            finished = processCommand(command);
+            finished = processCommand(command);            
         }
-        System.out.println("Thank you for playing.  Good bye.");
+        if(!gameOver) //se gameOver for falso, o jogador quitou do jogo
+            System.out.println("Thank you for playing.  Good bye.");
     }
     
     public void printWelcome() {
@@ -110,7 +140,8 @@ public class Game {
                 wantToQuit = quit(command);
                 break;
             case ATTACK:
-                wantToQuit = attackEnemy(command);
+                if(attackEnemy(command)) //se attack enemy retornar true, o heroi perdeu a batalha
+                    gameOver = true;
                 break;
             case PICK:
                 pickItem(command);
@@ -155,7 +186,7 @@ public class Game {
         }
     }
     
-    //Se o heroi perder, retorna false e acaba o jogo
+    //Se o heroi perder, retorna true e volta ao menu
     private boolean attackEnemy(Command command) {
         if(!command.hasSecondWord()) {
             // if there is no second word, we don't know who to attack...
@@ -175,7 +206,7 @@ public class Game {
             }
             
             if(hero.getHealthPoints() == 0){
-                System.out.println("Game Over.");
+                System.out.println("\nGame Over.");
                 return true;
             }
         } else System.out.println("There is no enemy called " + enemy + "!"); 

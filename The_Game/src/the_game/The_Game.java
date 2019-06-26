@@ -16,7 +16,7 @@ public class The_Game {
      */
     public static void main(String[] args) {
         Game jogo = new Game("Heroi");
-        jogo.play();
+        jogo.menu();
     }
     
 }

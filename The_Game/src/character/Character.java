@@ -31,6 +31,10 @@ public class Character {
         return healthPoints;
     }
     
+    public int getMaxHP() {
+        return maxHP;
+    }
+    
       public void setHealthPoints(int healthPoints) {
         if(healthPoints < maxHP)
           this.healthPoints = healthPoints;

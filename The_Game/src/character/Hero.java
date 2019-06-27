@@ -8,6 +8,7 @@ package character;
 import item.Item;
 import character.Character;
 import java.util.HashMap;
+import java.util.Set;
 
 /**
  *
@@ -74,5 +75,25 @@ public class Hero extends Character{
 
     public int getCurrentWeight() {
         return currentWeight;
+    }
+    
+    public String heroInfo() {
+        String returnString = "\nName: " + getName() +
+                              "\nHP: " + getHealthPoints() + "/" + getMaxHP() +
+                              "\nWeight: " + currentWeight + "/" + weightLimit +
+                              "\nCoins: " + getCoins();
+        
+        Set<String> items = Inventory.keySet();
+        
+        if(!Inventory.isEmpty()) {
+            returnString += "\nItems:";
+            
+            for (String name : items)
+                returnString += " " + name;
+        }
+        
+        returnString += "\n";
+               
+        return returnString;
     }
 }

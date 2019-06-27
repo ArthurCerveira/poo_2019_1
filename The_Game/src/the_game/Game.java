@@ -147,6 +147,8 @@ public class Game {
                 pickItem(command);
             case DROP:
                 dropItem(command);
+            case STATUS:
+                status();
             default:
                 break;
         }
@@ -247,6 +249,10 @@ public class Game {
             currentRoom.setItems(name, item);
         } else System.out.println("You don't have an item called " + name + "!");
             
+    }
+    
+    private void status() {
+        System.out.println(hero.heroInfo());
     }
     
     private boolean quit(Command command) 

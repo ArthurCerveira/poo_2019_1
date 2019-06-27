@@ -182,7 +182,6 @@ public class Game {
         else {
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
-            currentRoom.printEnemies();
         }
     }
     

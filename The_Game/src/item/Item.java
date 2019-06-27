@@ -6,11 +6,13 @@
 
 package item;
 
+import character.Hero;
+
 /**
  *
  * @author arthur
  */
-public class Item {
+public abstract class Item {
     private String name;
     private int weight;
 
@@ -26,4 +28,6 @@ public class Item {
     public int getWeight() {
         return weight;
     }
+    
+    public abstract void useItem(Hero hero);
 }

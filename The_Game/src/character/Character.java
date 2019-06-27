@@ -13,11 +13,13 @@ import java.util.Random;
  */
 public class Character {
     private String name;
+    private int maxHP;
     private int healthPoints;
     protected int coins;
 
     public Character(String name, int healthPoints) {
         this.name = name;
+        this.maxHP = healthPoints;
         this.healthPoints = healthPoints;
     }    
 
@@ -27,6 +29,12 @@ public class Character {
 
     public int getHealthPoints() {
         return healthPoints;
+    }
+    
+      public void setHealthPoints(int healthPoints) {
+        if(healthPoints < maxHP)
+          this.healthPoints = healthPoints;
+        else this.healthPoints = maxHP;
     }
     
     int luck() {
@@ -39,7 +47,7 @@ public class Character {
     
         
     void increment(){
-        if(healthPoints < 10)
+        if(healthPoints < maxHP)
             healthPoints++;
     }
     

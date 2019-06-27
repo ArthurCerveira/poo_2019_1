@@ -24,6 +24,7 @@ public class Room {
         this.description = description;
         exits = new HashMap<>();
         characters = new HashMap<>();
+        items = new HashMap<>();
     }
     
     public void setExit(String direction, Room neighbor){
@@ -43,7 +44,7 @@ public class Room {
     }
     
     public String getLongDescription() {
-        return "You are " + description + ".\n" + getExitString();
+        return "You are " + description + ".\n" + getExitString() + getEnemyString() + getItemString();
     }
     
     private String getExitString() {
@@ -52,6 +53,36 @@ public class Room {
         for(String exit : keys) {
             returnString += " " + exit;
         }
+        return returnString;
+    }
+    
+    public String getEnemyString() {
+        //enemies recebes todos os nomes de personagens da sala
+        Set<String> enemies = characters.keySet();
+        String returnString = "";
+        
+        //caso existam inimigos
+        if (!characters.isEmpty()) {
+            returnString= "\nEnemies:";
+            //este for itera pelos nomes e imprime
+            for (String name : enemies)
+                returnString += " " + name;
+        }
+        
+        return returnString;
+    }
+    
+    public String getItemString() {
+        Set<String> itemsRoom = items.keySet();
+        String returnString = "";
+        
+        if(!items.isEmpty()) {
+            returnString= "\nItems:";
+            
+            for (String name : itemsRoom)
+                returnString += " " + name;
+        }
+        
         return returnString;
     }
     
@@ -73,31 +104,5 @@ public class Room {
     
     public void removeItem(String name) {
         items.remove(name);
-    }
-    
-    public void printEnemies() {
-        //enemies recebes todos os nomes de personagens da sala
-        Set<String> enemies = characters.keySet();
-        
-        //caso existam inimigos
-        if (enemies != null) {
-            System.out.print("Enemies: ");
-            //este for itera pelos nomes e imprime
-            for (String name : enemies)
-                System.out.print(name + " ");
-        }
-        System.out.println();
-    }
-    
-    public void printItems() {
-        Set<String> itemsRoom = items.keySet();
-        
-        if(itemsRoom != null) {
-            System.out.println("Items: ");
-            
-            for (String name : itemsRoom)
-                System.out.println(name + " ");
-        }
-        System.out.println();
     }
 }

@@ -9,6 +9,7 @@ import character.Hero;
 import character.Vilain;
 import character.BattleSimulator;
 import item.Item;
+import item.Potion;
 import java.util.Scanner;
 import the_game.CommandWord;
 
@@ -68,6 +69,12 @@ public class Game {
         pub.setCharacters(bartender.getName(), bartender);
         lab.setCharacters(scientist.getName(), scientist);
         office.setCharacters(boss.getName(), boss);
+        
+        //cria os itens
+        Potion normalPotion = new Potion("potion", 1, 5);
+        
+        //coloca o item na sala
+        theatre.setItems(normalPotion.getName(), normalPotion);
         
         currentRoom = outside; 
     }
@@ -145,10 +152,16 @@ public class Game {
                 break;
             case PICK:
                 pickItem(command);
+                break;
             case DROP:
                 dropItem(command);
+                break;
             case STATUS:
                 status();
+                break;
+            case USE:
+                useItem(command);
+                break;
             default:
                 break;
         }
@@ -249,6 +262,23 @@ public class Game {
             currentRoom.setItems(name, item);
         } else System.out.println("You don't have an item called " + name + "!");
             
+    }
+    
+    private void useItem(Command command){
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know who to attack...
+            System.out.println("Use what?");
+            return;
+        }
+        
+        String name = command.getSecondWord();
+        
+        Item item = hero.getItem(name);
+
+        if (item != null ){
+            item.useItem(hero);
+            hero.removeItem(name);
+        } else System.out.println("You don't have an item called " + name + "!");
     }
     
     private void status() {

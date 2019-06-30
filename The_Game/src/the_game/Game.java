@@ -11,7 +11,6 @@ import character.BattleSimulator;
 import item.Item;
 import item.Potion;
 import java.util.Scanner;
-import the_game.CommandWord;
 
 /**
  *
@@ -146,8 +145,8 @@ public class Game {
             case QUIT:
                 wantToQuit = quit(command);
                 break;
-            case ATTACK:
-                if(attackEnemy(command)) //se attack enemy retornar true, o heroi perdeu a batalha
+            case FIGHT:
+                if(fightEnemy(command)) //se fight enemy retornar true, o heroi perdeu a batalha
                     gameOver = true;
                 break;
             case PICK:
@@ -201,7 +200,7 @@ public class Game {
     }
     
     //Se o heroi perder, retorna true e volta ao menu
-    private boolean attackEnemy(Command command) {
+    private boolean fightEnemy(Command command) {
         if(!command.hasSecondWord()) {
             // if there is no second word, we don't know who to attack...
             System.out.println("Attack who?");

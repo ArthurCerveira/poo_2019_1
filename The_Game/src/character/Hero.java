@@ -77,20 +77,29 @@ public class Hero extends Character{
         return currentWeight;
     }
     
+    public String getStringItems(){
+        String returnString = null;
+        
+        Set<String> items = Inventory.keySet();
+        
+        if(!Inventory.isEmpty()) {
+            returnString = "Items:";
+            
+            for (String name : items)
+                returnString += " " + name;
+        }
+        
+        return returnString;
+    }
+    
     public String heroInfo() {
         String returnString = "\nName: " + getName() +
                               "\nHP: " + getHealthPoints() + "/" + getMaxHP() +
                               "\nWeight: " + currentWeight + "/" + weightLimit +
                               "\nCoins: " + getCoins();
-        
-        Set<String> items = Inventory.keySet();
-        
-        if(!Inventory.isEmpty()) {
-            returnString += "\nItems:";
-            
-            for (String name : items)
-                returnString += " " + name;
-        }
+                              
+        if(getStringItems() != null)
+            returnString += "\n" + getStringItems();
         
         returnString += "\n";
                

@@ -97,19 +97,24 @@ public class BattleSimulator {
     public void items(Hero hero){
         if(hero.getStringItems() != null) {
             System.out.print(hero.getStringItems() +
-                             "\nType the item name to use it\n> ");
+                             "\nType the item name to use it or return to return\n> ");
         
             Scanner menuReader = new Scanner(System.in);
             String inputLine = null;
 
             inputLine = menuReader.nextLine();
-
-           Item item = hero.getItem(inputLine);
-
-            if (item != null ){
-                item.useItem(hero);
-                hero.removeItem(inputLine);
-            } else System.out.println("You don't have an item called " + inputLine + "!");
+            
+            Item item = hero.getItem(inputLine);
+            
+            switch(inputLine){
+                case "return":
+                    return;
+                default:
+                    if (item != null ){
+                        item.useItem(hero);
+                        hero.removeItem(inputLine);
+                    } else System.out.println("You don't have an item called " + inputLine + "!");
+            }        
         } else System.out.println("You don't any items!");
         
     }

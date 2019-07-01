@@ -16,15 +16,19 @@ import java.util.Set;
  */
 public class Hero extends Character{
     private HashMap<String, Item> Inventory;
+    private HashMap<String, Item> equippedItems;
     private int weightLimit;
     private int currentWeight;
     
-    public Hero(String name, int healthPoints, int weightLimit) {
-        super(name, healthPoints);
+    
+    public Hero(String name, int healthPoints, int attack, int weightLimit) {
+        super(name, healthPoints, attack);
         Inventory = new HashMap<>();
+        equippedItems = new HashMap<>();
         this.weightLimit = weightLimit;
         currentWeight = 0;
         coins = 0;
+        
     }
     
     void aliment() {
@@ -37,26 +41,35 @@ public class Hero extends Character{
         int enemyLuck = enemy.luck();
         int heroLuck = this.luck();
         if(enemyLuck > heroLuck) {
-            this.decrement();
+            this.decrement(enemy.getAttack());
             enemy.increment();
         }
         else { 
             if (enemyLuck < heroLuck) {
-                enemy.decrement();
+                enemy.decrement(this.getAttack());
                 this.increment();
             }
             else {
-                this.decrement();
-                enemy.decrement();
+                this.decrement(enemy.getAttack());
+                enemy.decrement(this.getAttack());
             }
         }
     }
     
     //Inventory functions
 
-    public boolean insertItem(String name, Item item) {
+    public boolean insertItemInventory(String name, Item item) {
         if((item.getWeight() + currentWeight) <= weightLimit) {
             Inventory.put(name, item);
+            currentWeight += item.getWeight();
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean insertEquippedItem(String name, Item item) {
+        if((item.getWeight() + currentWeight) <= weightLimit) {
+            equippedItems.put(name, item);
             currentWeight += item.getWeight();
             return true;
         }
@@ -72,12 +85,22 @@ public class Hero extends Character{
         Inventory.remove(name);
         return item;
     }
+    
+    public Item getEquippedItem(String name) {
+        return equippedItems.get(name);
+    }
+    
+    public Item removeEquippedItem(String name) {
+        Item item = equippedItems.get(name);
+        equippedItems.remove(name);
+        return item;
+    }
 
     public int getCurrentWeight() {
         return currentWeight;
     }
     
-    public String getStringItems(){
+    public String getStringInventory(){
         String returnString = null;
         
         Set<String> items = Inventory.keySet();
@@ -92,14 +115,29 @@ public class Hero extends Character{
         return returnString;
     }
     
+    public String getStringEquippedItems(){
+        String returnString = null;
+        
+        Set<String> items = equippedItems.keySet();
+        
+        if(!equippedItems.isEmpty()) {
+            returnString = "Equipped items:";
+            
+            for (String name : items)
+                returnString += " " + name;
+        }
+        
+        return returnString;
+    }
+    
     public String heroInfo() {
         String returnString = "\nName: " + getName() +
                               "\nHP: " + getHealthPoints() + "/" + getMaxHP() +
                               "\nWeight: " + currentWeight + "/" + weightLimit +
                               "\nCoins: " + getCoins();
                               
-        if(getStringItems() != null)
-            returnString += "\n" + getStringItems();
+        if(getStringInventory() != null)
+            returnString += "\n" + getStringInventory();
         
         returnString += "\n";
                

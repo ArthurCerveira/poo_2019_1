@@ -27,7 +27,7 @@ public class Game {
     {
         createRooms();
         parser = new Parser();
-        hero = new Hero(name, 10, 10);
+        hero = new Hero(name, 10, 10, 1);
         battleSimulator = new BattleSimulator();
         gameOver = false;
     }
@@ -239,7 +239,7 @@ public class Game {
         Item item = currentRoom.getItem(name);
         
         if (item != null ){
-            hero.insertItem(name, item);
+            hero.insertItemInventory(name, item);
             currentRoom.removeItem(name);
         } else System.out.println("There is no item called " + name + "!");
             

@@ -95,9 +95,9 @@ public class BattleSimulator {
     }
     
     public void items(Hero hero){
-        if(hero.getStringItems() != null) {
-            System.out.print(hero.getStringItems() +
-                             "\nType the item name to use it or return to return\n> ");
+        if(hero.getStringInventory() != null) {
+            System.out.print(hero.getStringInventory() +
+                             "\nType the item name to use it or 'return' to return\n> ");
         
             Scanner menuReader = new Scanner(System.in);
             String inputLine = null;
@@ -119,7 +119,7 @@ public class BattleSimulator {
         
     }
     
-    public boolean run(Hero hero){
+    public boolean run(Hero hero){ //possui 1/4 chance de escapar, se falhar o heroi perde 1HP
         Random dados = new Random();
         int resultado = dados.nextInt(4);
         if(resultado >= 3){
@@ -128,7 +128,7 @@ public class BattleSimulator {
         }
         System.out.println(hero.getName() + " could not escape!\n" +
                            hero.getName() + " lost 1HP.");
-        hero.decrement();
+        hero.decrement(1);
         return false;
     }
 }

@@ -16,11 +16,13 @@ public class Character {
     private int maxHP;
     private int healthPoints;
     protected int coins;
+    private int attack;
 
-    public Character(String name, int healthPoints) {
+    public Character(String name, int healthPoints, int attack) {
         this.name = name;
         this.maxHP = healthPoints;
         this.healthPoints = healthPoints;
+        this.attack = attack;
     }    
 
     public String getName() {
@@ -55,9 +57,9 @@ public class Character {
             healthPoints++;
     }
     
-    void decrement() {
+    void decrement(int HP) {
         if(healthPoints >= 0)
-            healthPoints--;
+            healthPoints -= HP;
         else if(healthPoints <= 0)
             System.out.println(name + " has fainted.");
         else
@@ -76,6 +78,14 @@ public class Character {
     
     void setCoins(int coins){
         this.coins = coins;
+    }
+    
+    public int getAttack(){
+        return attack;
+    }
+    
+    public void setAttack(int attack){
+        this.attack = attack;
     }
 }
 

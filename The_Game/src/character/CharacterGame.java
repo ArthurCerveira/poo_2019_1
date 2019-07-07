@@ -19,12 +19,11 @@ public class CharacterGame {
     private int attack;
     private boolean attackable;
 
-    public CharacterGame(String name, int healthPoints, int attack, boolean attackable) {
+    public CharacterGame(String name, int healthPoints, int attack) {
         this.name = name;
         this.maxHP = healthPoints;
         this.healthPoints = healthPoints;
         this.attack = attack;
-        this.attackable = attackable;
     }    
 
     public String getName() {
@@ -90,6 +89,14 @@ public class CharacterGame {
     
     public void setAttack(int attack){
         this.attack = attack;
+    }
+
+    public boolean isAttackable() {
+        return attackable;
+    }
+    
+    public void setAttackable(boolean attackable){
+        this.attackable = attackable;
     }
 }
 

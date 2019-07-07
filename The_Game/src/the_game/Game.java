@@ -29,7 +29,7 @@ public class Game {
     {
         createRooms();
         parser = new Parser();
-        hero = new Hero(name, 10, 1, 10, false);
+        hero = new Hero(name, 10, 1, 10);
         battleSimulator = new BattleSimulator();
         gameOver = false;
     }
@@ -60,10 +60,10 @@ public class Game {
         office.setExit("west", lab);
         
         //cria inimigos
-        scientist = new Vilain("scientist", 5, true);
-        bartender = new Vilain("bartender", 5, true);
-        actor  = new Vilain("actor", 5, true);
-        boss  = new Vilain("boss", 5, true);
+        scientist = new Vilain("scientist", 5);
+        bartender = new Vilain("bartender", 5);
+        actor  = new Vilain("actor", 5);
+        boss  = new Vilain("boss", 5);
         
         //coloca os inimigos nas salas
         theatre.setCharacters(actor.getName(), actor);
@@ -219,16 +219,17 @@ public class Game {
         CharacterGame vilain = currentRoom.getCharacter(enemy);
         
         if (vilain != null ) {
-            battleSimulator.simulate(hero, vilain);
-            if(vilain.getHealthPoints() == 0){
-                //System.out.println(enemy + " is no longer in the room");
-                currentRoom.removeCharacter(enemy);
-            }
-            
-            if(hero.getHealthPoints() == 0){
-                System.out.println("\nGame Over.");
-                return true;
-            }
+            if(vilain.isAttackable()){
+                battleSimulator.simulate(hero, vilain);
+
+                if(vilain.getHealthPoints() == 0)
+                    currentRoom.removeCharacter(enemy);            
+
+                if(hero.getHealthPoints() == 0){
+                    System.out.println("\nGame Over.");
+                    return true;
+                }
+            } else System.out.println("You can't fight with " + enemy + "!"); 
         } else System.out.println("There is no enemy called " + enemy + "!"); 
         
         return false;

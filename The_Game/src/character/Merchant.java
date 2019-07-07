@@ -11,7 +11,8 @@ package character;
  */
 public class Merchant extends CharacterGame{
     public Merchant(String name, int healthPoints, int attack) {
-        super(name, healthPoints, attack, false);
+        super(name, healthPoints, attack);
+        this.setAttackable(false);
     }
     
     

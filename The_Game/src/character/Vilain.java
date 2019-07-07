@@ -14,10 +14,11 @@ import java.util.Random;
  * @author aluno
  */
 public class Vilain extends CharacterGame{
-    public Vilain(String name, int healthPoints, boolean attackable) {
-        super(name, healthPoints, 1, attackable);
+    public Vilain(String name, int healthPoints) {
+        super(name, healthPoints, 1);
         Random randomCoins = new Random();
         this.coins = randomCoins.nextInt(200);
+        this.setAttackable(true);
     }
     
 }

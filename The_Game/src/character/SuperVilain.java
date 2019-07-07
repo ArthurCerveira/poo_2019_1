@@ -11,8 +11,8 @@ package character;
  */
 public class SuperVilain extends Vilain{
 
-    public SuperVilain(String name, int healthPoints, boolean attackable) {
-        super(name, healthPoints, attackable);
+    public SuperVilain(String name, int healthPoints) {
+        super(name, healthPoints);
     }
     
 }

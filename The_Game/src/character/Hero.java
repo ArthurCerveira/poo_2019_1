@@ -20,14 +20,14 @@ public class Hero extends CharacterGame{
     private int currentWeight;
     
     
-    public Hero(String name, int healthPoints, int attack, int weightLimit, boolean attackable) {
-        super(name, healthPoints, attack, attackable);
+    public Hero(String name, int healthPoints, int attack, int weightLimit) {
+        super(name, healthPoints, attack);
         Inventory = new HashMap<>();
         equippedItems = new HashMap<>();
         this.weightLimit = weightLimit;
         currentWeight = 0;
         coins = 0;
-        
+        this.setAttackable(false);
     }
     
     void aliment() {

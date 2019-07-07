@@ -14,7 +14,6 @@ import java.util.Set;
  * @author aluno
  */
 public class Hero extends CharacterGame{
-    private HashMap<String, Item> Inventory;
     private HashMap<String, Item> equippedItems;
     private int weightLimit;
     private int currentWeight;
@@ -22,7 +21,6 @@ public class Hero extends CharacterGame{
     
     public Hero(String name, int healthPoints, int attack, int weightLimit) {
         super(name, healthPoints, attack);
-        Inventory = new HashMap<>();
         equippedItems = new HashMap<>();
         this.weightLimit = weightLimit;
         currentWeight = 0;
@@ -56,10 +54,10 @@ public class Hero extends CharacterGame{
     }
     
     //Inventory functions
-
-    public boolean insertItemInventory(String name, Item item) {
+    @Override
+    public boolean insertItemInventory(Item item) {
         if((item.getWeight() + currentWeight) <= weightLimit) {
-            Inventory.put(name, item);
+            getInventory().put(item.getName(), item);
             currentWeight += item.getWeight();
             return true;
         }
@@ -73,16 +71,6 @@ public class Hero extends CharacterGame{
             return true;
         }
         return false;
-    }
-    
-    public Item getItem(String name) {
-        return Inventory.get(name);
-    }
-    
-    public Item removeItem(String name) {
-        Item item = Inventory.get(name);
-        Inventory.remove(name);
-        return item;
     }
     
     public Item getEquippedItem(String name) {
@@ -103,12 +91,13 @@ public class Hero extends CharacterGame{
         currentWeight = newWeight;
     }
     
+    @Override
     public String getStringInventory(){
         String returnString = null;
         
-        Set<String> items = Inventory.keySet();
+        Set<String> items = getInventory().keySet();
         
-        if(!Inventory.isEmpty()) {
+        if(!getInventory().isEmpty()) {
             returnString = "Items:";
             
             for (String name : items)

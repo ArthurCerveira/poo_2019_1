@@ -246,7 +246,7 @@ public class Game {
         Item item = currentRoom.getItem(name);
         
         if (item != null ){
-            if(hero.insertItemInventory(name, item)) //se pegar o item retorna verdadeiro
+            if(hero.insertItemInventory(item)) //se pegar o item retorna verdadeiro
                 currentRoom.removeItem(name);
             else System.out.println("You don't have enough space in your inventory!");
         } else System.out.println("There is no item called " + name + "!");

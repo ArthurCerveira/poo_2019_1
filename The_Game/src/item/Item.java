@@ -15,6 +15,7 @@ import character.Hero;
 public abstract class Item {
     private String name;
     private int weight;
+    private int price;
 
     public Item(String name, int weight) {
         this.name = name;
@@ -30,4 +31,13 @@ public abstract class Item {
     }
     
     public abstract void useItem(Hero hero);
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+    
 }

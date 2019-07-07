@@ -6,6 +6,7 @@
 package character;
 
 import character.CharacterGame;
+import item.Item;
 
 import java.util.Random;
 
@@ -19,6 +20,16 @@ public class Vilain extends CharacterGame{
         Random randomCoins = new Random();
         this.coins = randomCoins.nextInt(200);
         this.setAttackable(true);
+    }
+
+    @Override
+    public boolean insertItemInventory(Item item) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getStringInventory() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

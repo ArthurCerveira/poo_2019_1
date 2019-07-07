@@ -5,26 +5,34 @@
  */
 package character;
 
+import item.Item;
+import java.util.HashMap;
 import java.util.Random;
 
 /**
  *
  * @author aluno
  */
-public class CharacterGame {
+public abstract class CharacterGame {
     private String name;
     private int maxHP;
     private int healthPoints;
     protected int coins;
     private int attack;
     private boolean attackable;
+    private HashMap<String, Item> inventory;
 
     public CharacterGame(String name, int healthPoints, int attack) {
         this.name = name;
         this.maxHP = healthPoints;
         this.healthPoints = healthPoints;
         this.attack = attack;
+        this.inventory = new HashMap<>();
     }    
+
+    public HashMap<String, Item> getInventory() {
+        return inventory;
+    }
 
     public String getName() {
         return name;
@@ -71,7 +79,8 @@ public class CharacterGame {
         String str;
         if(healthPoints < 0)
             healthPoints = 0;
-        str = ("#####################\n# Nome: " + name + "\n# Energia: " + healthPoints +"\n#####################");
+        str = ("#####################\n# Nome: " + name + 
+               "\n# Energia: " + healthPoints +"\n#####################");
         System.out.println(str);
     }
     
@@ -97,6 +106,20 @@ public class CharacterGame {
     
     public void setAttackable(boolean attackable){
         this.attackable = attackable;
+    }
+    
+    public abstract boolean insertItemInventory(Item item);
+    
+    public abstract String getStringInventory();
+    
+    public Item getItem(String name) {
+        return inventory.get(name);
+    }
+    
+    public Item removeItem(String name) {
+        Item item = getInventory().get(name);
+        getInventory().remove(name);
+        return item;
     }
 }
 

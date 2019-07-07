@@ -165,6 +165,8 @@ public class Game {
             case USE:
                 useItem(command);
                 break;
+            case SHOP:
+                shop();
             default:
                 break;
         }
@@ -295,6 +297,10 @@ public class Game {
         else {
             return true;  // signal that we want to quit
         }
+    }
+    
+    private void shop(){
+        
     }
 
     

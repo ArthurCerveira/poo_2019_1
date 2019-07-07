@@ -6,8 +6,6 @@
 package character;
 
 import item.Item;
-import character.Character;
-import static java.lang.Math.floor;
 import java.util.HashMap;
 import java.util.Set;
 

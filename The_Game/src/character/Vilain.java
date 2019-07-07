@@ -5,7 +5,7 @@
  */
 package character;
 
-import character.Character;
+import character.CharacterGame;
 
 import java.util.Random;
 
@@ -13,7 +13,7 @@ import java.util.Random;
  *
  * @author aluno
  */
-public class Vilain extends Character{
+public class Vilain extends CharacterGame{
     public Vilain(String name, int healthPoints, boolean attackable) {
         super(name, healthPoints, 1, attackable);
         Random randomCoins = new Random();

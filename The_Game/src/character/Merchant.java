@@ -9,7 +9,7 @@ package character;
  *
  * @author arthur
  */
-public class Merchant extends Character{
+public class Merchant extends CharacterGame{
     public Merchant(String name, int healthPoints, int attack) {
         super(name, healthPoints, attack, false);
     }

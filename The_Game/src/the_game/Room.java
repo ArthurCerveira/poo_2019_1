@@ -5,7 +5,7 @@
  */
 package the_game;
 
-import character.Vilain;
+import character.CharacterGame;
 import java.util.HashMap;
 import java.util.Set;
 import item.Item;
@@ -17,7 +17,7 @@ import item.Item;
 public class Room {
     private String description;
     private HashMap<String, Room> exits;
-    private HashMap<String, Vilain> characters;
+    private HashMap<String, CharacterGame> characters;
     private HashMap<String, Item> items;
 
     public Room(String description) {
@@ -31,7 +31,7 @@ public class Room {
         exits.put(direction, neighbor);
     }
     
-    public void setCharacters(String name, Vilain character){
+    public void setCharacters(String name, CharacterGame character){
         characters.put(name, character);
     }
     
@@ -90,7 +90,7 @@ public class Room {
         return exits.get(direction);
     }
     
-    public Vilain getCharacter(String name) {
+    public CharacterGame getCharacter(String name) {
         return characters.get(name);
     }
     

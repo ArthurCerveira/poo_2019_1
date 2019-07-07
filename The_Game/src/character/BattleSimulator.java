@@ -3,7 +3,6 @@ package character;
 import item.Item;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -24,7 +23,7 @@ public class BattleSimulator {
         vilain = new Vilain(nameVilain, healthPoints);
     }*/
     
-    public void simulate(Hero hero, Vilain vilain){// throws InterruptedException {
+    public void simulate(Hero hero, CharacterGame vilain){// throws InterruptedException {
         Scanner menuReader = new Scanner(System.in);
         String inputLine = null;
         boolean runaway = false;
@@ -81,7 +80,7 @@ public class BattleSimulator {
             
     }
     
-    public void attack(Hero hero, Vilain vilain){
+    public void attack(Hero hero, CharacterGame vilain){
         hero.fight(vilain);            
         try {
             Thread.sleep(500);

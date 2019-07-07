@@ -13,7 +13,7 @@ import java.util.Set;
  *
  * @author aluno
  */
-public class Hero extends Character{
+public class Hero extends CharacterGame{
     private HashMap<String, Item> Inventory;
     private HashMap<String, Item> equippedItems;
     private int weightLimit;
@@ -35,7 +35,7 @@ public class Hero extends Character{
         increment();
     }
     
-    void fight(Vilain enemy) {
+    void fight(CharacterGame enemy) {
         // Throw the dice
         int enemyLuck = enemy.luck();
         int heroLuck = this.luck();

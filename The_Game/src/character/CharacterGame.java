@@ -11,7 +11,7 @@ import java.util.Random;
  *
  * @author aluno
  */
-public class Character {
+public class CharacterGame {
     private String name;
     private int maxHP;
     private int healthPoints;
@@ -19,7 +19,7 @@ public class Character {
     private int attack;
     private boolean attackable;
 
-    public Character(String name, int healthPoints, int attack, boolean attackable) {
+    public CharacterGame(String name, int healthPoints, int attack, boolean attackable) {
         this.name = name;
         this.maxHP = healthPoints;
         this.healthPoints = healthPoints;

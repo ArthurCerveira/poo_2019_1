@@ -5,6 +5,7 @@
  */
 package the_game;
 
+import character.CharacterGame;
 import character.Hero;
 import character.Vilain;
 import character.BattleSimulator;
@@ -215,7 +216,7 @@ public class Game {
         
         String enemy = command.getSecondWord();
         
-        Vilain vilain = currentRoom.getCharacter(enemy);
+        CharacterGame vilain = currentRoom.getCharacter(enemy);
         
         if (vilain != null ) {
             battleSimulator.simulate(hero, vilain);

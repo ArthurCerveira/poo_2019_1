@@ -25,6 +25,7 @@ public class Potion extends Item{
 
     @Override
     public void useItem(Hero hero) {
+        hero.setCurrentWeight(hero.getCurrentWeight() - this.getWeight());
         hero.setHealthPoints(hero.getHealthPoints() + healthPoints);
     }
     

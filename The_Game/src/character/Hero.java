@@ -7,6 +7,7 @@ package character;
 
 import item.Item;
 import character.Character;
+import static java.lang.Math.floor;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -100,6 +101,10 @@ public class Hero extends Character{
         return currentWeight;
     }
     
+    public void setCurrentWeight(int newWeight){
+        currentWeight = newWeight;
+    }
+    
     public String getStringInventory(){
         String returnString = null;
         
@@ -134,13 +139,37 @@ public class Hero extends Character{
         String returnString = "\nName: " + getName() +
                               "\nHP: " + getHealthPoints() + "/" + getMaxHP() +
                               "\nWeight: " + currentWeight + "/" + weightLimit +
-                              "\nCoins: " + getCoins();
+                              "\nCoins: " + getCoins() +
+                              "\nAttack: " + getAttack();
                               
         if(getStringInventory() != null)
             returnString += "\n" + getStringInventory();
         
+        if(getStringEquippedItems() != null)
+            returnString += "\n" + getStringEquippedItems();
+        
         returnString += "\n";
                
         return returnString;
+    }
+    
+    @Override
+    public void setCoins(int coins){
+        int weight = currentWeight;
+        
+        // diminui o valor anterior de peso das moedas
+        int coinWeight = this.coins / 200;
+        weight -= coinWeight;
+        
+        // aumenta com o peso atual
+        coinWeight = coins / 200;
+        weight += coinWeight;
+        
+        if(weight <= weightLimit ){
+            //atualiza valor do peso
+            currentWeight = weight;
+            //atualiza valor da moeda
+            this.coins = coins;
+        }
     }
 }

@@ -10,6 +10,7 @@ import character.Vilain;
 import character.BattleSimulator;
 import item.Item;
 import item.Potion;
+import item.Sword;
 import java.util.Scanner;
 
 /**
@@ -27,7 +28,7 @@ public class Game {
     {
         createRooms();
         parser = new Parser();
-        hero = new Hero(name, 10, 10, 1);
+        hero = new Hero(name, 10, 1, 10);
         battleSimulator = new BattleSimulator();
         gameOver = false;
     }
@@ -70,10 +71,13 @@ public class Game {
         office.setCharacters(boss.getName(), boss);
         
         //cria os itens
-        Potion normalPotion = new Potion("potion", 1, 5);
+        Potion normalPotion = new Potion("potion", 1, 5);        
+        Sword sword = new Sword("sword", 2, 3);
         
         //coloca o item na sala
         theatre.setItems(normalPotion.getName(), normalPotion);
+        lab.setItems(sword.getName(), sword);
+        
         
         currentRoom = outside; 
     }
@@ -229,7 +233,6 @@ public class Game {
     
     private void pickItem(Command command) {
         if(!command.hasSecondWord()) {
-            // if there is no second word, we don't know who to attack...
             System.out.println("Pick what?");
             return;
         }
@@ -239,15 +242,15 @@ public class Game {
         Item item = currentRoom.getItem(name);
         
         if (item != null ){
-            hero.insertItemInventory(name, item);
-            currentRoom.removeItem(name);
+            if(hero.insertItemInventory(name, item)) //se pegar o item retorna verdadeiro
+                currentRoom.removeItem(name);
+            else System.out.println("You don't have enough space in your inventory!");
         } else System.out.println("There is no item called " + name + "!");
             
     }
     
     private void dropItem(Command command){
         if(!command.hasSecondWord()) {
-            // if there is no second word, we don't know who to attack...
             System.out.println("Drop what?");
             return;
         }
@@ -265,7 +268,6 @@ public class Game {
     
     private void useItem(Command command){
         if(!command.hasSecondWord()) {
-            // if there is no second word, we don't know who to attack...
             System.out.println("Use what?");
             return;
         }

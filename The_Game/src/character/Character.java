@@ -68,6 +68,8 @@ public class Character {
     
     void printInfo() {
         String str;
+        if(healthPoints < 0)
+            healthPoints = 0;
         str = ("#####################\n# Nome: " + name + "\n# Energia: " + healthPoints +"\n#####################");
         System.out.println(str);
     }

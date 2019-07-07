@@ -34,7 +34,7 @@ public class BattleSimulator {
                            " and he's carrying " + vilain.getCoins() + " coins.\n" +
                            "Your options are:");
              
-        while(hero.getHealthPoints() != 0 && vilain.getHealthPoints() != 0) {
+        while(hero.getHealthPoints() > 0 && vilain.getHealthPoints() > 0) {
             System.out.println("- attack\n"
                              + "- item\n"
                              + "- run");
@@ -70,9 +70,9 @@ public class BattleSimulator {
                 break;
         } 
         
-        if(hero.getHealthPoints() == 0) 
+        if(hero.getHealthPoints() <= 0) 
             System.out.println(vilain.getName() + " won.");
-        if(vilain.getHealthPoints() == 0) {
+        if(vilain.getHealthPoints() <= 0) {
             System.out.println(hero.getName() + " won.\n" + vilain.getName() + 
                               " dropped " + vilain.getCoins() + " coins.");
             

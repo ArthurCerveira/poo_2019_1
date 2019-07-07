@@ -9,10 +9,11 @@ package character;
  *
  * @author arthur
  */
-public class SuperVilain extends Vilain{
-
-    public SuperVilain(String name, int healthPoints, boolean attackable) {
-        super(name, healthPoints, attackable);
+public class Merchant extends Character{
+    public Merchant(String name, int healthPoints, int attack) {
+        super(name, healthPoints, attack, false);
     }
+    
+    
     
 }

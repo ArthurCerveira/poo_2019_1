@@ -22,8 +22,8 @@ public class Hero extends Character{
     private int currentWeight;
     
     
-    public Hero(String name, int healthPoints, int attack, int weightLimit) {
-        super(name, healthPoints, attack);
+    public Hero(String name, int healthPoints, int attack, int weightLimit, boolean attackable) {
+        super(name, healthPoints, attack, attackable);
         Inventory = new HashMap<>();
         equippedItems = new HashMap<>();
         this.weightLimit = weightLimit;

@@ -28,7 +28,7 @@ public class Game {
     {
         createRooms();
         parser = new Parser();
-        hero = new Hero(name, 10, 1, 10);
+        hero = new Hero(name, 10, 1, 10, false);
         battleSimulator = new BattleSimulator();
         gameOver = false;
     }
@@ -59,10 +59,10 @@ public class Game {
         office.setExit("west", lab);
         
         //cria inimigos
-        scientist = new Vilain("scientist", 5);
-        bartender = new Vilain("bartender", 5);
-        actor  = new Vilain("actor", 5);
-        boss  = new Vilain("boss", 5);
+        scientist = new Vilain("scientist", 5, true);
+        bartender = new Vilain("bartender", 5, true);
+        actor  = new Vilain("actor", 5, true);
+        boss  = new Vilain("boss", 5, true);
         
         //coloca os inimigos nas salas
         theatre.setCharacters(actor.getName(), actor);

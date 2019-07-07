@@ -17,12 +17,14 @@ public class Character {
     private int healthPoints;
     protected int coins;
     private int attack;
+    private boolean attackable;
 
-    public Character(String name, int healthPoints, int attack) {
+    public Character(String name, int healthPoints, int attack, boolean attackable) {
         this.name = name;
         this.maxHP = healthPoints;
         this.healthPoints = healthPoints;
         this.attack = attack;
+        this.attackable = attackable;
     }    
 
     public String getName() {

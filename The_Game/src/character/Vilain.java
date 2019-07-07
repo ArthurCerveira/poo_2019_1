@@ -14,8 +14,8 @@ import java.util.Random;
  * @author aluno
  */
 public class Vilain extends Character{
-    public Vilain(String name, int healthPoints) {
-        super(name, healthPoints, 1);
+    public Vilain(String name, int healthPoints, boolean attackable) {
+        super(name, healthPoints, 1, attackable);
         Random randomCoins = new Random();
         this.coins = randomCoins.nextInt(200);
     }

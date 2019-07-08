@@ -110,7 +110,7 @@ public class Game {
         
         //cria os itens do mercador
         superPotion = new Potion("superPotion", 2, 10, 200);
-        HPplus = new HealthPointsUp("HPup", 2, 200, 5);
+        HPplus = new HealthPointsUp("HPup", 2, 300, 5);
         
         //coloca os items no shop
         merchant.insertItemInventory(superPotion);
@@ -129,7 +129,7 @@ public class Game {
         treasureRoom.setItems(treasure.getName(), treasure);
         
         
-        currentRoom = lanai; 
+        currentRoom = niihau; 
     }
     
     /*public void menu() {

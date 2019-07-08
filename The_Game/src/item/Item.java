@@ -38,6 +38,7 @@ public abstract class Item {
         return weight;
     }
     
+    //retorna boolean para determinar se o item deve ou nao ser removido do inventario
     public abstract boolean useItem(Hero hero);
 
     public int getPrice() {

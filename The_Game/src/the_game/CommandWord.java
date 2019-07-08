@@ -10,8 +10,8 @@ package the_game;
  * @author aluno
  */
 public enum CommandWord {    
-    GO("sail"), QUIT("quit"), HELP("help"), FIGHT("fight"), UNKNOWN("?"), PICK("pick"), 
-    DROP("drop"), STATUS("status"), USE("use"), SHOP("shop"), BUY("buy");
+    GO("sail"), QUIT("quit"), HELP("help"), FIGHT("fight"), UNKNOWN("?"),
+    PICK("pick"), DROP("drop"), STATUS("status"), USE("use"), SHOP("shop");
     
     private String commandString;
     

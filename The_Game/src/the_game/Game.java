@@ -10,6 +10,7 @@ import character.Hero;
 import character.Vilain;
 import character.BattleSimulator;
 import character.Merchant;
+import item.HealthPointsUp;
 import item.Item;
 import item.Potion;
 import item.Sword;
@@ -36,7 +37,7 @@ public class Game {
     
     public void createRooms() {
         Room niihau, kauahi, oahu, molokai, lanai, maui, kahoolawe,kawaihe, hawai, treasureRoom;
-        CharacterGame scientist, bartender, actor, boss, merchant;
+        CharacterGame anne, calico, francis, charles, ching, edward, merchant, blackbeard;
         Item normalPotion, sword, superPotion, HPplus;
         
         //cria as salas
@@ -81,37 +82,44 @@ public class Game {
         
         treasureRoom.setExit("west", kahoolawe);
         
-        /*cria inimigos
-        scientist = new Vilain("scientist", 5);
-        bartender = new Vilain("bartender", 5);
-        actor  = new Vilain("actor", 5);
-        boss  = new Vilain("boss", 5);
+        //cria inimigos 
+        anne = new Vilain("Anne", 5);
+        calico = new Vilain("Calico", 5);
+        francis  = new Vilain("Francis", 5);
+        ching  = new Vilain("Ching", 10);
+        edward = new Vilain("Edward", 10);
+        charles = new Vilain("Charles", 10);
+        blackbeard = new Vilain("Blackbeard", 15);
         
         //cria o mercador
-        merchant = new Merchant("merchant");
+        merchant = new Merchant("Merchant");
         
         //coloca os inimigos nas salas
-        theatre.setCharacters(actor);
-        pub.setCharacters(bartender);
-        lab.setCharacters(scientist);
-        office.setCharacters(boss);
+        kauahi.setCharacters(anne);
+        oahu.setCharacters(calico);
+        molokai.setCharacters(francis);
+        lanai.setCharacters(ching);
+        maui.setCharacters(charles);
+        kawaihe.setCharacters(edward);
         
         //coloca o mercador na sala
-        pub.setCharacters(merchant);
+        lanai.setCharacters(merchant);
         
         //cria os itens do mercador
-        superPotion = new Potion("super potion", 2, 10, 200);
+        superPotion = new Potion("superpotion", 2, 10, 200);
+        HPplus = new HealthPointsUp("HPup", 2, 200, 5);
         
         //coloca os items no shop
         merchant.insertItemInventory(superPotion);
+        merchant.insertItemInventory(HPplus);
         
         //cria os itens
         normalPotion = new Potion("potion", 1, 5);        
         sword = new Sword("sword", 2, 3, 10);
         
         //coloca o item na sala
-        theatre.setItems(normalPotion.getName(), normalPotion);
-        lab.setItems(sword.getName(), sword);*/
+        maui.setItems(normalPotion.getName(), normalPotion);
+        hawai.setItems(sword.getName(), sword);
         
         
         currentRoom = niihau; 
@@ -332,9 +340,9 @@ public class Game {
     }
     
     private void shop(){
-        CharacterGame merchant = currentRoom.getCharacter("merchant");
+        CharacterGame merchant = currentRoom.getCharacter("Merchant");
         Scanner menuShop = new Scanner(System.in);
-        String itemName = null;
+        String itemName = "";
         
         //se houver um mercador na sala
         if(merchant != null) {

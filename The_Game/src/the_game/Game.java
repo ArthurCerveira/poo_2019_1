@@ -132,7 +132,7 @@ public class Game {
         currentRoom = lanai; 
     }
     
-    public void menu() {
+    /*public void menu() {
         Scanner menuReader = new Scanner(System.in);
         int option;
         
@@ -155,7 +155,7 @@ public class Game {
             gameOver = false;
             menu();
         }
-    }
+    }*/
     
     public void play() {            
         printWelcome();

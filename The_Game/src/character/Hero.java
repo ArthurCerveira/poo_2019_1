@@ -64,9 +64,9 @@ public class Hero extends CharacterGame{
         return false;
     }
     
-    public boolean insertEquippedItem(String name, Item item) {
+    public boolean insertEquippedItem(Item item) {
         if((item.getWeight() + currentWeight) <= weightLimit) {
-            equippedItems.put(name, item);
+            equippedItems.put(item.getName(), item);
             currentWeight += item.getWeight();
             return true;
         }
@@ -100,9 +100,13 @@ public class Hero extends CharacterGame{
         if(!getInventory().isEmpty()) {
             returnString = "Items:";
             
-            for (String name : items)
+            int i = 0;
+            for (String name : items) {
+                if(i != 0)
+                    returnString += ",";
                 returnString += " " + name;
-        }
+                i++;
+            }        }
         
         return returnString;
     }

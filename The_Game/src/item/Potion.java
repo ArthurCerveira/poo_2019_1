@@ -18,6 +18,11 @@ public class Potion extends Item{
         super(name, weight);
         this.healthPoints = healthPoints;
     }
+    
+    public Potion(String name, int weight, int healthPoints, int price) {
+        super(name, weight, price);
+        this.healthPoints = healthPoints;
+    }
 
     public int getHealthPoints() {
         return healthPoints;

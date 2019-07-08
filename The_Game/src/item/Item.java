@@ -16,10 +16,18 @@ public abstract class Item {
     private String name;
     private int weight;
     private int price;
-
+    
+    //construtor para itens na sala
     public Item(String name, int weight) {
         this.name = name;
         this.weight = weight;
+    }
+    
+    //construtor para itens que serao vendidos
+    public Item(String name, int weight, int price){
+        this.name = name;
+        this.weight = weight;
+        this.price = price;
     }
 
     public String getName() {

@@ -96,7 +96,7 @@ public class BattleSimulator {
     public void items(Hero hero){
         if(hero.getStringInventory() != null) {
             System.out.print(hero.getStringInventory() +
-                             "\nType the item name to use it or 'return' to return\n> ");
+                             "\nType the item name to use it or 'back' to return\n> ");
         
             Scanner menuReader = new Scanner(System.in);
             String inputLine = null;
@@ -106,7 +106,7 @@ public class BattleSimulator {
             Item item = hero.getItem(inputLine);
             
             switch(inputLine){
-                case "return":
+                case "back":
                     return;
                 default:
                     if (item != null ){

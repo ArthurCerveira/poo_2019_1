@@ -31,8 +31,8 @@ public class Room {
         exits.put(direction, neighbor);
     }
     
-    public void setCharacters(String name, CharacterGame character){
-        characters.put(name, character);
+    public void setCharacters(CharacterGame character){
+        characters.put(character.getName(), character);
     }
     
     public void setItems(String name, Item item) {
@@ -44,7 +44,8 @@ public class Room {
     }
     
     public String getLongDescription() {
-        return "You are " + description + ".\n" + getExitString() + getEnemyString() + getItemString();
+        return "You are " + description + ".\n" + getExitString() + 
+                getCharacterString() + getItemString();
     }
     
     private String getExitString() {
@@ -56,17 +57,22 @@ public class Room {
         return returnString;
     }
     
-    public String getEnemyString() {
+    public String getCharacterString() {
         //enemies recebes todos os nomes de personagens da sala
         Set<String> enemies = characters.keySet();
         String returnString = "";
         
         //caso existam inimigos
         if (!characters.isEmpty()) {
-            returnString= "\nEnemies:";
+            returnString= "\nCharacters:";
             //este for itera pelos nomes e imprime
-            for (String name : enemies)
+            int i = 0;
+            for (String name : enemies) {
+                if(i != 0)
+                    returnString += ",";
                 returnString += " " + name;
+                i++;
+            }
         }
         
         return returnString;
@@ -79,8 +85,13 @@ public class Room {
         if(!items.isEmpty()) {
             returnString= "\nItems:";
             
-            for (String name : itemsRoom)
+            int i = 0;
+            for (String name : itemsRoom) {
+                if(i != 0)
+                    returnString += ",";
                 returnString += " " + name;
+                i++;
+            }
         }
         
         return returnString;

@@ -112,6 +112,8 @@ public abstract class CharacterGame {
     
     public abstract String getStringInventory();
     
+    public void sellItem(String itemName, Hero hero){}
+    
     public Item getItem(String name) {
         return inventory.get(name);
     }

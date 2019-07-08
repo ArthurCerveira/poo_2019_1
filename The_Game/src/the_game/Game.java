@@ -9,6 +9,7 @@ import character.CharacterGame;
 import character.Hero;
 import character.Vilain;
 import character.BattleSimulator;
+import character.Merchant;
 import item.Item;
 import item.Potion;
 import item.Sword;
@@ -25,8 +26,7 @@ public class Game {
     private BattleSimulator battleSimulator;
     private boolean gameOver;
     
-    public Game(String name) 
-    {
+    public Game(String name) {
         createRooms();
         parser = new Parser();
         hero = new Hero(name, 10, 1, 10);
@@ -36,7 +36,8 @@ public class Game {
     
     public void createRooms() {
         Room outside, theatre, pub, lab, office;
-        Vilain scientist, bartender, actor, boss;
+        CharacterGame scientist, bartender, actor, boss, merchant;
+        Item normalPotion, sword, superPotion, HPplus;
         
         //cria as salas
         outside = new Room("outside the main entrance of the university");
@@ -65,15 +66,27 @@ public class Game {
         actor  = new Vilain("actor", 5);
         boss  = new Vilain("boss", 5);
         
+        //cria o mercador
+        merchant = new Merchant("merchant");
+        
         //coloca os inimigos nas salas
-        theatre.setCharacters(actor.getName(), actor);
-        pub.setCharacters(bartender.getName(), bartender);
-        lab.setCharacters(scientist.getName(), scientist);
-        office.setCharacters(boss.getName(), boss);
+        theatre.setCharacters(actor);
+        pub.setCharacters(bartender);
+        lab.setCharacters(scientist);
+        office.setCharacters(boss);
+        
+        //coloca o mercador na sala
+        pub.setCharacters(merchant);
+        
+        //cria os itens do mercador
+        superPotion = new Potion("super potion", 2, 10, 200);
+        
+        //coloca os items no shop
+        merchant.insertItemInventory(superPotion);
         
         //cria os itens
-        Potion normalPotion = new Potion("potion", 1, 5);        
-        Sword sword = new Sword("sword", 2, 3);
+        normalPotion = new Potion("potion", 1, 5);        
+        sword = new Sword("sword", 2, 3);
         
         //coloca o item na sala
         theatre.setItems(normalPotion.getName(), normalPotion);
@@ -178,8 +191,7 @@ public class Game {
     
     private void printHelp() 
     {
-        System.out.println("You are lost. You are alone. You wander");
-        System.out.println("around at the university.");
+        System.out.println(currentRoom.getLongDescription());
         System.out.println();
         System.out.println("Your command words are:");
         parser.showCommands();
@@ -290,19 +302,46 @@ public class Game {
         System.out.println(hero.heroInfo());
     }
     
-    private boolean quit(Command command) 
-    {
+    private boolean quit(Command command) {
         if(command.hasSecondWord()) {
             System.out.println("Quit what?");
             return false;
         }
-        else {
-            return true;  // signal that we want to quit
-        }
+        else return true;  // signal that we want to quit
+        
     }
     
     private void shop(){
+        CharacterGame merchant = currentRoom.getCharacter("merchant");
+        Scanner menuShop = new Scanner(System.in);
+        String itemName = "";
         
+        //se houver um mercador na sala
+        if(merchant != null) {
+            while(merchant.getStringInventory() != null && !itemName.equals("back")) {
+                System.out.print("Welcome to my shop!\n" +
+                                 merchant.getStringInventory() +
+                                 "Type the name of the item you want to buy " + 
+                                 "or 'back' to return\n");
+
+                System.out.print("> ");    
+                itemName = menuShop.nextLine();
+
+                Item item = merchant.getItem(itemName);
+
+                switch(itemName){
+                    case "back":
+                        break;
+                    default:
+                        if (item != null )
+                            merchant.sellItem(itemName, hero);
+                        else System.out.println("I don't sell any item called " + itemName + "!");
+                }
+            } 
+            
+            if(merchant.getStringInventory() == null)
+                System.out.println("I don't have anything to sell right now");
+        } else System.out.println("There's no merchant in this room");
     }
 
     

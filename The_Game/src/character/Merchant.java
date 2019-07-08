@@ -6,7 +6,6 @@
 package character;
 
 import item.Item;
-import java.util.HashMap;
 import java.util.Set;
 
 /**
@@ -14,8 +13,8 @@ import java.util.Set;
  * @author arthur
  */
 public class Merchant extends CharacterGame{
-    public Merchant(String name, int healthPoints, int attack) {
-        super(name, healthPoints, attack);
+    public Merchant(String name) {
+        super(name, 1 , 0);
         this.setAttackable(false);
     }
     
@@ -25,6 +24,7 @@ public class Merchant extends CharacterGame{
         return true;
     }
     
+    @Override
     public void sellItem(String itemName, Hero hero){
         Item item = getInventory().get(itemName);
         
@@ -36,8 +36,9 @@ public class Merchant extends CharacterGame{
                 this.removeItem(itemName);
                 
                 System.out.println(itemName + " is now in your inventory");
-            } else System.out.println("You don't have enough money to buy "+ itemName);            
-        } else System.out.println("There's no item called "+ itemName);   
+            } else System.out.println("You don't have enough money to buy " + 
+                                      itemName + "\n");            
+        } else System.out.println("There's no item called " + itemName + "\n");   
     }
     
     @Override
@@ -47,11 +48,13 @@ public class Merchant extends CharacterGame{
         Set<String> i = getInventory().keySet();
         
         if(!i.isEmpty()) {
-            returnString = "Items:";
+            returnString = "Items:\n";
             
             for(String name : i)
-                returnString += " " + name + "price: " + 
-                                getItem(name).getPrice() + " coins\n";
+                returnString += name + "\nprice: " + 
+                                getItem(name).getPrice() + " coins"
+                                + "\nweight: " + getItem(name).getWeight() 
+                                + "\n\n";
         }
         
         return returnString;

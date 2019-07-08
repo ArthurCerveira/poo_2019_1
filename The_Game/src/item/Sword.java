@@ -22,10 +22,11 @@ public class Sword extends Item{
     }
 
     @Override
-    public void useItem(Hero hero) {
+    public boolean useItem(Hero hero) {
         hero.setCurrentWeight(hero.getCurrentWeight() - this.getWeight());
         hero.insertEquippedItem(this);
         hero.setAttack(attackBonus);
+        return true;
     }
     
 }

@@ -22,10 +22,11 @@ public class HealthPointsUp extends Item{
     }
     
     @Override
-    public void useItem(Hero hero) {
+    public boolean useItem(Hero hero) {
         hero.setCurrentWeight(hero.getCurrentWeight() - this.getWeight());
         hero.setMaxHP(hero.getMaxHP() + extraHP);
         hero.setHealthPoints(hero.getMaxHP());
+        return true;
     }
     
 }

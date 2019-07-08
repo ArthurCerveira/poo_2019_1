@@ -10,10 +10,13 @@ import character.Hero;
 import character.Vilain;
 import character.BattleSimulator;
 import character.Merchant;
+import character.SuperVilain;
 import item.HealthPointsUp;
 import item.Item;
+import item.Key;
 import item.Potion;
 import item.Sword;
+import item.Treasure;
 import java.util.Scanner;
 
 /**
@@ -37,8 +40,8 @@ public class Game {
     
     public void createRooms() {
         Room niihau, kauahi, oahu, molokai, lanai, maui, kahoolawe,kawaihe, hawai, treasureRoom;
-        CharacterGame anne, calico, francis, charles, ching, edward, merchant, blackbeard;
-        Item normalPotion, sword, superPotion, HPplus;
+        CharacterGame anne, calico, francis, charles, ching, edward, merchant;
+        Item normalPotion, sword, superPotion, HPplus, key, treasure;
         
         //cria as salas
         niihau = new Room("on the island of Ni'ihau");
@@ -74,6 +77,7 @@ public class Game {
         kahoolawe.setExit("west",lanai);
         kahoolawe.setExit("north",maui);
         kahoolawe.setExit("south",kawaihe);
+        kahoolawe.setExit("east", treasureRoom);
         
         kawaihe.setExit("north", kahoolawe);
         kawaihe.setExit("south", hawai);
@@ -89,7 +93,6 @@ public class Game {
         ching  = new Vilain("Ching", 10);
         edward = new Vilain("Edward", 10);
         charles = new Vilain("Charles", 10);
-        blackbeard = new Vilain("Blackbeard", 15);
         
         //cria o mercador
         merchant = new Merchant("Merchant");
@@ -106,7 +109,7 @@ public class Game {
         lanai.setCharacters(merchant);
         
         //cria os itens do mercador
-        superPotion = new Potion("superpotion", 2, 10, 200);
+        superPotion = new Potion("superPotion", 2, 10, 200);
         HPplus = new HealthPointsUp("HPup", 2, 200, 5);
         
         //coloca os items no shop
@@ -116,13 +119,17 @@ public class Game {
         //cria os itens
         normalPotion = new Potion("potion", 1, 5);        
         sword = new Sword("sword", 2, 3, 10);
+        key = new Key("key", 1);
+        treasure = new Treasure("treasure", 1);
         
         //coloca o item na sala
         maui.setItems(normalPotion.getName(), normalPotion);
         hawai.setItems(sword.getName(), sword);
+        hawai.setItems(key.getName(), key);
+        treasureRoom.setItems(treasure.getName(), treasure);
         
         
-        currentRoom = niihau; 
+        currentRoom = lanai; 
     }
     
     public void menu() {
@@ -236,11 +243,19 @@ public class Game {
 
         // Try to leave current room.
         Room nextRoom = currentRoom.getExit(direction);
-
+        
         if (nextRoom == null) 
             System.out.println("There is no door!");
         
         else {
+            if (nextRoom.getItem("treasure") != null){
+                if(hero.getItem("key") != null)
+                    System.out.println("You used the key to open the door");
+                else {
+                    System.out.println("You need a key to open this door");
+                    return;
+                }                
+            }
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
         }
@@ -286,6 +301,11 @@ public class Game {
         Item item = currentRoom.getItem(name);
         
         if (item != null ){
+            if(item.getName().equals("treasure")) {
+                finalEvent();
+                return;
+            }
+                
             if(hero.insertItemInventory(item)) //se pegar o item retorna verdadeiro
                 currentRoom.removeItem(name);
             else System.out.println("You don't have enough space in your inventory!");
@@ -321,8 +341,8 @@ public class Game {
         Item item = hero.getItem(name);
 
         if (item != null ){
-            item.useItem(hero);
-            hero.removeItem(name);
+            if(item.useItem(hero))
+                hero.removeItem(name);
         } else System.out.println("You don't have an item called " + name + "!");
     }
     
@@ -370,6 +390,21 @@ public class Game {
             if(merchant.getStringInventory() == null)
                 System.out.println("I don't have anything to sell right now");
         } else System.out.println("There's no merchant in this room");
+    }
+    
+    public void finalEvent(){
+        SuperVilain blackbeard = new SuperVilain("Blackbeard", 15);
+        System.out.println("To pick the treasure you must first defeat Blackbeard!");
+        
+        battleSimulator.simulate(hero, blackbeard);
+        
+        if(blackbeard.getHealthPoints() == 0)
+            System.out.println("\nCongratulations! You won the game!");
+
+        if(hero.getHealthPoints() == 0)
+            System.out.println("\nGame Over.");
+        
+        gameOver = true; //o heroi perdendo ou ganhando, o jogo acaba                               
     }
 
     

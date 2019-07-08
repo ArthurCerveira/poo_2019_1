@@ -29,9 +29,16 @@ public class Potion extends Item{
     }
 
     @Override
-    public void useItem(Hero hero) {
-        hero.setCurrentWeight(hero.getCurrentWeight() - this.getWeight());
-        hero.setHealthPoints(hero.getHealthPoints() + healthPoints);
+    public boolean useItem(Hero hero) {
+        if(hero.getHealthPoints() < hero.getMaxHP()){
+            hero.setCurrentWeight(hero.getCurrentWeight() - this.getWeight());
+            hero.setHealthPoints(hero.getHealthPoints() + healthPoints);
+            return true;
+        }
+        
+        System.out.println("You already have max HP");
+        return false;
+        
     }
     
     

@@ -110,8 +110,8 @@ public class BattleSimulator {
                     return;
                 default:
                     if (item != null ){
-                        item.useItem(hero);
-                        hero.removeItem(inputLine);
+                        if(item.useItem(hero))
+                            hero.removeItem(inputLine);
                     } else System.out.println("You don't have an item called " + inputLine + "!");
             }        
         } else System.out.println("You don't any items!");

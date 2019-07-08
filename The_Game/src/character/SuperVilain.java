@@ -13,6 +13,8 @@ public class SuperVilain extends Vilain{
 
     public SuperVilain(String name, int healthPoints) {
         super(name, healthPoints);
+        this.setAttack(3);
+        this.setCoins(500);
     }
     
 }

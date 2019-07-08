@@ -15,7 +15,7 @@ public class The_Game {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Game jogo = new Game("Heroi");
+        Game jogo = new Game("Pirate");
         jogo.menu();
     }
     

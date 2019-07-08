@@ -38,7 +38,7 @@ public abstract class Item {
         return weight;
     }
     
-    public abstract void useItem(Hero hero);
+    public abstract boolean useItem(Hero hero);
 
     public int getPrice() {
         return price;

@@ -41,15 +41,15 @@ public class Game {
         
         //cria as salas
         niihau = new Room("on the island of Ni'ihau");
-        kauahi = new Room("Kaua'l");
-        oahu = new Room("in the campus pub");
-        molokai = new Room("in a computing lab");
-        lanai = new Room("in the computing admin office");
-        maui = new Room("");
-        kahoolawe = new Room("");
-        kawaihe = new Room("");
-        hawai = new Room("");
-        treasureRoom = new Room("");
+        kauahi = new Room("on the island of Kaua'l");
+        oahu = new Room("on the island of O'ahu");
+        molokai = new Room("on the island of Moloka'i");
+        lanai = new Room("on the island of Lãna'i");
+        maui = new Room("on the island of Maui");
+        kahoolawe = new Room("on the island of Kaho'olawe");
+        kawaihe = new Room("on the island of Kawaihae");
+        hawai = new Room("on the island of Hawai'i");
+        treasureRoom = new Room("in a room with a treasure");
         
         //cria as saidas
         niihau.setExit("east", kauahi);
@@ -81,7 +81,7 @@ public class Game {
         
         treasureRoom.setExit("west", kahoolawe);
         
-        //cria inimigos
+        /*cria inimigos
         scientist = new Vilain("scientist", 5);
         bartender = new Vilain("bartender", 5);
         actor  = new Vilain("actor", 5);
@@ -111,10 +111,10 @@ public class Game {
         
         //coloca o item na sala
         theatre.setItems(normalPotion.getName(), normalPotion);
-        lab.setItems(sword.getName(), sword);
+        lab.setItems(sword.getName(), sword);*/
         
         
-        currentRoom = outside; 
+        currentRoom = niihau; 
     }
     
     public void menu() {

@@ -45,8 +45,12 @@ public abstract class CharacterGame {
     public int getMaxHP() {
         return maxHP;
     }
+
+    public void setMaxHP(int maxHP) {
+        this.maxHP = maxHP;
+    }
     
-      public void setHealthPoints(int healthPoints) {
+    public void setHealthPoints(int healthPoints) {
         if(healthPoints < maxHP)
           this.healthPoints = healthPoints;
         else this.healthPoints = maxHP;

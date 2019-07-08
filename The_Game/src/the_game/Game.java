@@ -35,30 +35,51 @@ public class Game {
     }
     
     public void createRooms() {
-        Room outside, theatre, pub, lab, office;
+        Room niihau, kauahi, oahu, molokai, lanai, maui, kahoolawe,kawaihe, hawai, treasureRoom;
         CharacterGame scientist, bartender, actor, boss, merchant;
         Item normalPotion, sword, superPotion, HPplus;
         
         //cria as salas
-        outside = new Room("outside the main entrance of the university");
-        theatre = new Room("in a lecture theatre");
-        pub = new Room("in the campus pub");
-        lab = new Room("in a computing lab");
-        office = new Room("in the computing admin office");
+        niihau = new Room("on the island of Ni'ihau");
+        kauahi = new Room("Kaua'l");
+        oahu = new Room("in the campus pub");
+        molokai = new Room("in a computing lab");
+        lanai = new Room("in the computing admin office");
+        maui = new Room("");
+        kahoolawe = new Room("");
+        kawaihe = new Room("");
+        hawai = new Room("");
+        treasureRoom = new Room("");
         
         //cria as saidas
-        outside.setExit("east", theatre);
-        outside.setExit("south", lab);
-        outside.setExit("west", pub);
+        niihau.setExit("east", kauahi);
+        
+        kauahi.setExit("west", niihau);
+        kauahi.setExit("east", oahu);
 
-        theatre.setExit("west", outside);
+        oahu.setExit("west", kauahi);
+        oahu.setExit("east", molokai);
 
-        pub.setExit("east", outside);
+        molokai.setExit("west", oahu);
+        molokai.setExit("east", maui);
+        molokai.setExit("south", lanai);
 
-        lab.setExit("north", outside);
-        lab.setExit("east", office);
+        lanai.setExit("north", molokai);
+        lanai.setExit("east", kahoolawe);
 
-        office.setExit("west", lab);
+        maui.setExit("west", molokai);
+        maui.setExit("south", kahoolawe);
+        
+        kahoolawe.setExit("west",lanai);
+        kahoolawe.setExit("north",maui);
+        kahoolawe.setExit("south",kawaihe);
+        
+        kawaihe.setExit("north", kahoolawe);
+        kawaihe.setExit("south", hawai);
+        
+        hawai.setExit("north", kawaihe);
+        
+        treasureRoom.setExit("west", kahoolawe);
         
         //cria inimigos
         scientist = new Vilain("scientist", 5);
@@ -86,7 +107,7 @@ public class Game {
         
         //cria os itens
         normalPotion = new Potion("potion", 1, 5);        
-        sword = new Sword("sword", 2, 3);
+        sword = new Sword("sword", 2, 3, 10);
         
         //coloca o item na sala
         theatre.setItems(normalPotion.getName(), normalPotion);
@@ -102,8 +123,7 @@ public class Game {
         
         System.out.println("\nMENU");
         System.out.println("1 - New Game");
-        System.out.println("2 - Load Game");
-        System.out.println("3 - Quit\n");
+        System.out.println("2 - Quit\n");
         
         option = menuReader.nextInt();
         
@@ -111,7 +131,7 @@ public class Game {
             case 1:
                 play();
                 break;
-            case 3:
+            case 2:
                 System.out.println("Thank you for playing.  Good bye.");
                 break;
         }
@@ -136,8 +156,8 @@ public class Game {
     
     public void printWelcome() {
         System.out.println();
-        System.out.println("Welcome to the Game!");
-        System.out.println("The Game is an adaptation of tyhe game World of Zuul.");
+        System.out.println("You are a pirate on the Archipelago of Hawaii.");
+        System.out.println("You were given a hint that there could be a hidden treasure east of Kohoolawe");
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
         System.out.println(currentRoom.getLongDescription());
@@ -314,7 +334,7 @@ public class Game {
     private void shop(){
         CharacterGame merchant = currentRoom.getCharacter("merchant");
         Scanner menuShop = new Scanner(System.in);
-        String itemName = "";
+        String itemName = null;
         
         //se houver um mercador na sala
         if(merchant != null) {

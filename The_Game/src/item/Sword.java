@@ -13,10 +13,12 @@ import character.Hero;
  */
 public class Sword extends Item{
     private int attackBonus;
+    private int durability;
     
-    public Sword(String name, int weight, int attackBonus) {
+    public Sword(String name, int weight, int attackBonus, int durability) {
         super(name, weight);
         this.attackBonus = attackBonus;
+        this.durability = durability;
     }
 
     @Override

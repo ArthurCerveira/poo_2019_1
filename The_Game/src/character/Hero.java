@@ -106,7 +106,8 @@ public class Hero extends CharacterGame{
                     returnString += ",";
                 returnString += " " + name;
                 i++;
-            }        }
+            }        
+        }
         
         return returnString;
     }
